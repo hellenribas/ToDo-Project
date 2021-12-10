@@ -32,19 +32,33 @@ botaoId.addEventListener('click', addItens);
 
 let listOl = document.getElementById('lista-tarefas');
 let input = document.getElementById('texto-tarefa');
-function addItens () {
-   let criarLiAdd = document.createElement('li');
-   criarLiAdd.className = 'liAdd'
+function addItens() {
+    let criarLiAdd = document.createElement('li');
+    criarLiAdd.className = 'liAdd'
     listOl.appendChild(criarLiAdd);
-    console.log(listOl);
     let textInput = input.value;
     listOl.lastChild.innerText = textInput;
     input.value = '';
 }
 let liAdicionadas = document.getElementById('lista-tarefas');
-liAdicionadas.addEventListener('click', mudandoCor);
+let lis = document.getElementsByClassName('liAdd');
+liAdicionadas.addEventListener('click', addCor);
+function addCor(event) {
+    let clicado = event.target;
+    for (i = 0; i < lis.length; i += 1) {
+        lis[i].style.backgroundColor = 'white';
+    }
+    clicado.style.backgroundColor = 'rgb(128, 128, 128)';
+}
 
-function mudandoCor (event) {
-     let clicado = event.target;
-     clicado.style.backgroundColor = 'rgb(128, 128, 128)';
+liAdicionadas.addEventListener('dblclick', riscandoTexto);
+
+function riscandoTexto(event3) {
+    console.log('entrounafunçãorisco');
+    if (event3.target.classList[1] !== 'completed') {
+        event3.target.classList.add('completed');
+    } else if (event3.target.classList[1] === 'completed') {
+        console.log('entrou no if else risco');
+        event3.target.classList.remove('completed');
+    }
 }
