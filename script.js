@@ -88,7 +88,6 @@ function criarBotaoRemoverFinalizado() {
     botao3.id = 'remover-finalizados';
     let text3 = document.createTextNode('Apagar Finalizados');
     botao3.appendChild(text3);
-    // botao.style.backgroundColor = 'green';
     botoes.appendChild(botao3);
 }
 criarBotaoRemoverFinalizado()
@@ -102,4 +101,44 @@ function removerFinalizados() {
             ol.removeChild(liIndex);
         }
     }
+}
+function criarBotaoSalvar () {
+    let criarBotaoSalvar = document.createElement('button');
+    criarBotaoSalvar.id = 'salvar-tarefas';
+    let textSalvar = document.createTextNode('Salvar');
+    criarBotaoSalvar.appendChild(textSalvar);
+    botoes.appendChild(criarBotaoSalvar);
+}
+criarBotaoSalvar();
+let botaoSalvar = document.getElementById('salvar-tarefas');
+
+let olNova = document.getElementById('lista-tarefas');
+
+function pegarInformacoes (lista) {
+    let arrayInfo = [];
+    for (let index = 0; index < lista.children.length; index+= 1) {
+        arrayInfo.push(lista.children[index].innerText, lista.children[index].className) 
+    }
+    console.log(arrayInfo);
+    return arrayInfo;
+}
+function  salvarLocalStorage (array) {
+    localStorage.setItem('key', array);
+}
+
+botaoSalvar.addEventListener('click', function () {
+    salvarLocalStorage(pegarInformacoes(olNova));
+});
+let itensLocalStorage = localStorage.getItem('key');
+function listaLocalStorage () {
+    let arrayLocal = itensLocalStorage.split(',');
+    for (index = 0; index < arrayLocal.length; index += 2) {
+        let liLocalStorage = document.createElement('li');
+        liLocalStorage.innerText =  arrayLocal[index];
+        liLocalStorage.className = arrayLocal[index + 1];
+        olNova.appendChild(liLocalStorage);
+    }
+}
+if (itensLocalStorage !== null) {
+    listaLocalStorage();
 }
