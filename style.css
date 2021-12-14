@@ -1,3 +1,146 @@
+
+body {
+    background-color: #75ABBC;
+    background-image: url(image1.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+    
+}
+
 .completed {
     text-decoration: line-through solid rgb(0, 0, 0);
+}
+h1 {
+    margin-top: 250px;
+    margin-bottom: 30px;
+    color: #ffc300;
+    font-size: 30px;
+}
+h1, p {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+p {
+    color: aliceblue;
+}
+#input {
+    text-align: center;
+}
+#botoes {
+    text-align: center;
+}
+#apaga-tudo {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+#remover-finalizados {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+#salvar-tarefas {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+#mover-cima {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 15px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+#mover-baixo {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+#remover-selecionado {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #61a5c2;
+    color: aliceblue;
+}
+li {
+    margin-left: 770px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    color: azure;
+    margin-left: 42%;
+    font-size: 20px;
+    word-break: break-all;
+    width: 200px;
+}
+#criar-tarefa {
+    margin: 10px;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #61a5c2;
+    color: aliceblue;
+    border-radius: 20px;
+}
+#conteudo {
+    box-shadow: 5px 5px 10px 5px rgba(255, 255, 255, 0.438);
+    border-radius: 70px 10px;
+    width: 90%;
+    margin: auto;
+
+}
+#texto-tarefa {
+    width: 300px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+#apaga-tudo:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#remover-finalizados:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#salvar-tarefas:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#mover-cima:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#mover-baixo:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#remover-selecionado:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
+}
+#criar-tarefa:hover {
+    background-color: #f0ebdc;
+    color: #61a5c2;
 }

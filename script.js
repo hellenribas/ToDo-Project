@@ -1,5 +1,4 @@
 let sectionFirst = document.getElementById('input');
-// console.log(sectionFirst);
 function criarInput() {
     let input = document.createElement('input');
     input.type = 'text';
@@ -13,7 +12,6 @@ function criarLista() {
     let listOrden = document.createElement('ol');
     listOrden.id = 'lista-tarefas';
     sectionList.appendChild(listOrden);
-
 }
 criarLista();
 
@@ -22,16 +20,14 @@ function criarBotao() {
     botao.id = 'criar-tarefa';
     let text = document.createTextNode('Adicionar');
     botao.appendChild(text);
-    // botao.style.backgroundColor = 'green';
     sectionFirst.appendChild(botao);
 }
 criarBotao();
-
 let botaoId = document.getElementById('criar-tarefa');
 botaoId.addEventListener('click', addItens);
-
 let listOl = document.getElementById('lista-tarefas');
 let input = document.getElementById('texto-tarefa');
+
 function addItens() {
     let criarLiAdd = document.createElement('li');
     criarLiAdd.className = 'liAdd'
@@ -46,9 +42,10 @@ liAdicionadas.addEventListener('click', addCor);
 function addCor(event) {
     let clicado = event.target;
     for (i = 0; i < lis.length; i += 1) {
-        lis[i].style.backgroundColor = 'white';
-    }
+        lis[i].style.backgroundColor = '';
+    } if (clicado.id !== 'lista-tarefas') {
     clicado.style.backgroundColor = 'rgb(128, 128, 128)';
+}
 }
 
 liAdicionadas.addEventListener('dblclick', riscandoTexto);
@@ -169,7 +166,7 @@ function moverBaixo () {
             olNova.children[i].innerText = textIrmao;
             olNova.children[i].nextSibling.innerText = textSelec;
             olNova.children[i].nextSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            olNova.children[i].style.backgroundColor = 'white';
+            olNova.children[i].style.backgroundColor = '';
             return olNova.children[i]
        }  
 }
@@ -184,7 +181,7 @@ function moverCima () {
             olNova.children[i].previousSibling.innerText = textSelec2;
             olNova.children[i].innerText = textIrmao2;
             olNova.children[i].previousSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            olNova.children[i].style.backgroundColor = 'white';
+            olNova.children[i].style.backgroundColor = '';
             return olNova.children[i]
  
         
@@ -194,7 +191,7 @@ function moverCima () {
 function botaoRemSelecionado () {
     let botaoRemSelec = document.createElement('button');
     botaoRemSelec.id = 'remover-selecionado';
-    let textRemove = document.createTextNode('Remover');
+    let textRemove = document.createTextNode('Remover Selecionado');
     botaoRemSelec.appendChild(textRemove);
     botoes.appendChild(botaoRemSelec);
 }
