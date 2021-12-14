@@ -142,3 +142,73 @@ function listaLocalStorage () {
 if (itensLocalStorage !== null) {
     listaLocalStorage();
 }
+function criarBotoesMover() {
+    let criarMoverCima = document.createElement('button');
+    criarMoverCima.id = 'mover-cima';
+    let textCima = document.createTextNode('UP');
+    criarMoverCima.appendChild(textCima);
+    botoes.appendChild(criarMoverCima);
+
+    let criarMoverBaixo = document.createElement('button');
+    criarMoverBaixo.id = 'mover-baixo';
+    let textBaixo = document.createTextNode('Down');
+    criarMoverBaixo.appendChild(textBaixo);
+    botoes.appendChild(criarMoverBaixo);
+}
+criarBotoesMover();
+
+let botaoDown = document.getElementById('mover-baixo');
+botaoDown.addEventListener('click', moverBaixo);
+function moverBaixo () {
+    for (i = 0; i < olNova.children.length; i += 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].nextSibling !== null) {
+            let textSelec = olNova.children[i].innerText;
+            console.log(textSelec);
+            let textIrmao = olNova.children[i].nextSibling.innerText
+            console.log(textIrmao);
+            olNova.children[i].innerText = textIrmao;
+            olNova.children[i].nextSibling.innerText = textSelec;
+            olNova.children[i].nextSibling.style.backgroundColor = 'rgb(128, 128, 128)';
+            olNova.children[i].style.backgroundColor = 'white';
+            return olNova.children[i]
+       }  
+}
+}
+let botaoUp = document.getElementById('mover-cima');
+botaoUp.addEventListener('click', moverCima);
+function moverCima () {
+    for (i = 0; i < olNova.children.length; i += 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].previousSibling !== null) {
+            let textSelec2 = olNova.children[i].innerText;
+            let textIrmao2 = olNova.children[i].previousSibling.innerText
+            olNova.children[i].previousSibling.innerText = textSelec2;
+            olNova.children[i].innerText = textIrmao2;
+            olNova.children[i].previousSibling.style.backgroundColor = 'rgb(128, 128, 128)';
+            olNova.children[i].style.backgroundColor = 'white';
+            return olNova.children[i]
+ 
+        
+    }
+}
+}
+function botaoRemSelecionado () {
+    let botaoRemSelec = document.createElement('button');
+    botaoRemSelec.id = 'remover-selecionado';
+    let textRemove = document.createTextNode('Remover');
+    botaoRemSelec.appendChild(textRemove);
+    botoes.appendChild(botaoRemSelec);
+}
+botaoRemSelecionado();
+
+let botaoremover = document.getElementById('remover-selecionado');
+botaoremover.addEventListener('click',removerSelecionado);
+
+function removerSelecionado () {
+    for (i = 0; i < olNova.children.length; i =+ 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)') {
+            olNova.removeChild(olNova.children[i]);
+        }
+    }
+}
+
+
