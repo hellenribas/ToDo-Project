@@ -1,211 +1,203 @@
-let sectionFirst = document.getElementById('input');
+const sectionFirst = document.getElementById('input');
+const sectionList = document.getElementById('list');
+const botoes = document.getElementById('botoes');
+const rgb = 'rgb(128, 128, 128)';
+const listTask = 'lista-tarefas';
+
 function criarInput() {
-    let input = document.createElement('input');
-    input.type = 'text';
-    input.id = 'texto-tarefa';
-    sectionFirst.appendChild(input);
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.id = 'texto-tarefa';
+  sectionFirst.appendChild(input);
 }
 criarInput();
 
-let sectionList = document.getElementById('list');
 function criarLista() {
-    let listOrden = document.createElement('ol');
-    listOrden.id = 'lista-tarefas';
-    sectionList.appendChild(listOrden);
+  const listOrden = document.createElement('ol');
+  listOrden.id = listTask;
+  sectionList.appendChild(listOrden);
 }
 criarLista();
 
 function criarBotao() {
-    let botao = document.createElement('button');
-    botao.id = 'criar-tarefa';
-    let text = document.createTextNode('Adicionar');
-    botao.appendChild(text);
-    sectionFirst.appendChild(botao);
+  const botao = document.createElement('button');
+  botao.id = 'criar-tarefa';
+  const text = document.createTextNode('Adicionar');
+  botao.appendChild(text);
+  sectionFirst.appendChild(botao);
 }
 criarBotao();
-let botaoId = document.getElementById('criar-tarefa');
-botaoId.addEventListener('click', addItens);
-let listOl = document.getElementById('lista-tarefas');
-let input = document.getElementById('texto-tarefa');
-
+const botaoId = document.getElementById('criar-tarefa');
+const listOl = document.getElementById(listTask);
+const input = document.getElementById('texto-tarefa');
 function addItens() {
-    let criarLiAdd = document.createElement('li');
-    criarLiAdd.className = 'liAdd'
-    listOl.appendChild(criarLiAdd);
-    let textInput = input.value;
-    listOl.lastChild.innerText = textInput;
-    input.value = '';
+  const criarLiAdd = document.createElement('li');
+  criarLiAdd.className = 'liAdd';
+  listOl.appendChild(criarLiAdd);
+  const textInput = input.value;
+  listOl.lastChild.innerText = textInput;
+  input.value = '';
 }
-let liAdicionadas = document.getElementById('lista-tarefas');
-let lis = document.getElementsByClassName('liAdd');
-liAdicionadas.addEventListener('click', addCor);
+botaoId.addEventListener('click', addItens);
+const lis = document.getElementsByClassName('liAdd');
 function addCor(event) {
-    let clicado = event.target;
-    for (i = 0; i < lis.length; i += 1) {
-        lis[i].style.backgroundColor = '';
-    } if (clicado.id !== 'lista-tarefas') {
-    clicado.style.backgroundColor = 'rgb(128, 128, 128)';
+  const clicado = event.target;
+  for (let i = 0; i < lis.length; i += 1) {
+    lis[i].style.backgroundColor = '';
+  } if (clicado.id !== listTask) {
+    clicado.style.backgroundColor = rgb;
+  }
 }
-}
-
-liAdicionadas.addEventListener('dblclick', riscandoTexto);
+listOl.addEventListener('click', addCor);
 
 function riscandoTexto(event3) {
-    if (event3.target.classList[1] !== 'completed') {
-        event3.target.classList.add('completed');
-    } else if (event3.target.classList[1] === 'completed') {
-        console.log('entrou no if else risco');
-        event3.target.classList.remove('completed');
-    }
+  if (event3.target.classList[1] !== 'completed') {
+    event3.target.classList.add('completed');
+  } else if (event3.target.classList[1] === 'completed') {
+    event3.target.classList.remove('completed');
+  }
 }
-let botoes = document.getElementById('botoes');
+listOl.addEventListener('dblclick', riscandoTexto);
+
 function criarBotaoRemover() {
-    let botao2 = document.createElement('button');
-    botao2.id = 'apaga-tudo';
-    let text2 = document.createTextNode('Apagar');
-    botao2.appendChild(text2);
-    // botao.style.backgroundColor = 'green';
-    botoes.appendChild(botao2);
+  const botao2 = document.createElement('button');
+  botao2.id = 'apaga-tudo';
+  const text2 = document.createTextNode('Apagar');
+  botao2.appendChild(text2);
+  // botao.style.backgroundColor = 'green';
+  botoes.appendChild(botao2);
 }
 criarBotaoRemover();
-let li = document.getElementsByClassName('liAdd');
-let botaoRemove = document.getElementById('apaga-tudo');
-let ol = document.querySelector('#lista-tarefas');
-botaoRemove.addEventListener('click', removerLista);
+const botaoRemove = document.getElementById('apaga-tudo');
+const ol = document.querySelector('#lista-tarefas');
 function removerLista() {
-    let liIndex = 0;
-    const olLength = ol.children.length
-    for (index = olLength - 1; index >= 0; index -= 1) {
-        liIndex = li[index];
-        ol.removeChild(liIndex);
-    }
+  let liIndex = 0;
+  const olLength = ol.children.length;
+  for (let index = olLength - 1; index >= 0; index -= 1) {
+    liIndex = lis[index];
+    ol.removeChild(liIndex);
+  }
 }
+botaoRemove.addEventListener('click', removerLista);
 function criarBotaoRemoverFinalizado() {
-    let botao3 = document.createElement('button');
-    botao3.id = 'remover-finalizados';
-    let text3 = document.createTextNode('Apagar Finalizados');
-    botao3.appendChild(text3);
-    botoes.appendChild(botao3);
+  const botao3 = document.createElement('button');
+  botao3.id = 'remover-finalizados';
+  const text3 = document.createTextNode('Apagar Finalizados');
+  botao3.appendChild(text3);
+  botoes.appendChild(botao3);
 }
-criarBotaoRemoverFinalizado()
-let botao3 = document.getElementById('remover-finalizados');
-botao3.addEventListener('click', removerFinalizados);
+criarBotaoRemoverFinalizado();
+const botao3 = document.getElementById('remover-finalizados');
 function removerFinalizados() {
-    const olLength = ol.children.length
-    for (index = olLength - 1; index >= 0; index -= 1) {
-        if (ol.children[index].classList[1] === 'completed') {
-            liIndex = li[index];
-            ol.removeChild(liIndex);
-        }
+  const olLength = ol.children.length;
+  for (let index = olLength - 1; index >= 0; index -= 1) {
+    if (ol.children[index].classList[1] === 'completed') {
+      const liIndex = lis[index];
+      ol.removeChild(liIndex);
     }
+  }
 }
-function criarBotaoSalvar () {
-    let criarBotaoSalvar = document.createElement('button');
-    criarBotaoSalvar.id = 'salvar-tarefas';
-    let textSalvar = document.createTextNode('Salvar');
-    criarBotaoSalvar.appendChild(textSalvar);
-    botoes.appendChild(criarBotaoSalvar);
+botao3.addEventListener('click', removerFinalizados);
+function criarBotaoSalvar() {
+  const criarBotaoSave = document.createElement('button');
+  criarBotaoSave.id = 'salvar-tarefas';
+  const textSalvar = document.createTextNode('Salvar');
+  criarBotaoSave.appendChild(textSalvar);
+  botoes.appendChild(criarBotaoSave);
 }
 criarBotaoSalvar();
-let botaoSalvar = document.getElementById('salvar-tarefas');
-
-let olNova = document.getElementById('lista-tarefas');
-
-function pegarInformacoes (lista) {
-    let arrayInfo = [];
-    for (let index = 0; index < lista.children.length; index+= 1) {
-        arrayInfo.push(lista.children[index].innerText, lista.children[index].className) 
-    }
-    console.log(arrayInfo);
-    return arrayInfo;
+const botaoSalvar = document.getElementById('salvar-tarefas');
+function pegarInformacoes(lista) {
+  const arrayInfo = [];
+  for (let index = 0; index < lista.children.length; index += 1) {
+    arrayInfo.push(lista.children[index].innerText, lista.children[index].className);
+  }
+  return arrayInfo;
 }
-function  salvarLocalStorage (array) {
-    localStorage.setItem('key', array);
+function salvarLocalStorage(array) {
+  localStorage.setItem('key', array);
 }
 
-botaoSalvar.addEventListener('click', function () {
-    salvarLocalStorage(pegarInformacoes(olNova));
+botaoSalvar.addEventListener('click', () => {
+  salvarLocalStorage(pegarInformacoes(listOl));
 });
-let itensLocalStorage = localStorage.getItem('key');
-function listaLocalStorage () {
-    let arrayLocal = itensLocalStorage.split(',');
-    for (index = 0; index < arrayLocal.length; index += 2) {
-        let liLocalStorage = document.createElement('li');
-        liLocalStorage.innerText =  arrayLocal[index];
-        liLocalStorage.className = arrayLocal[index + 1];
-        olNova.appendChild(liLocalStorage);
-    }
+const itensLocalStorage = localStorage.getItem('key');
+function listaLocalStorage() {
+  const arrayLocal = itensLocalStorage.split(',');
+  for (let index = 0; index < arrayLocal.length; index += 2) {
+    const liLocalStorage = document.createElement('li');
+    liLocalStorage.innerText = arrayLocal[index];
+    liLocalStorage.className = arrayLocal[index + 1];
+    listOl.appendChild(liLocalStorage);
+  }
 }
 if (itensLocalStorage !== null) {
-    listaLocalStorage();
+  listaLocalStorage();
 }
 function criarBotoesMover() {
-    let criarMoverCima = document.createElement('button');
-    criarMoverCima.id = 'mover-cima';
-    let textCima = document.createTextNode('UP');
-    criarMoverCima.appendChild(textCima);
-    botoes.appendChild(criarMoverCima);
+  const criarMoverCima = document.createElement('button');
+  criarMoverCima.id = 'mover-cima';
+  const textCima = document.createTextNode('UP');
+  criarMoverCima.appendChild(textCima);
+  botoes.appendChild(criarMoverCima);
 
-    let criarMoverBaixo = document.createElement('button');
-    criarMoverBaixo.id = 'mover-baixo';
-    let textBaixo = document.createTextNode('Down');
-    criarMoverBaixo.appendChild(textBaixo);
-    botoes.appendChild(criarMoverBaixo);
+  const criarMoverBaixo = document.createElement('button');
+  criarMoverBaixo.id = 'mover-baixo';
+  const textBaixo = document.createTextNode('Down');
+  criarMoverBaixo.appendChild(textBaixo);
+  botoes.appendChild(criarMoverBaixo);
 }
 criarBotoesMover();
 
-let botaoDown = document.getElementById('mover-baixo');
-botaoDown.addEventListener('click', moverBaixo);
-function moverBaixo () {
-    for (i = 0; i < olNova.children.length; i += 1) {
-        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].nextSibling !== null) {
-            let textSelec = olNova.children[i].innerText;
-            console.log(textSelec);
-            let textIrmao = olNova.children[i].nextSibling.innerText
-            console.log(textIrmao);
-            olNova.children[i].innerText = textIrmao;
-            olNova.children[i].nextSibling.innerText = textSelec;
-            olNova.children[i].nextSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            olNova.children[i].style.backgroundColor = '';
-            return olNova.children[i]
-       }  
-}
-}
-let botaoUp = document.getElementById('mover-cima');
-botaoUp.addEventListener('click', moverCima);
-function moverCima () {
-    for (i = 0; i < olNova.children.length; i += 1) {
-        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].previousSibling !== null) {
-            let textSelec2 = olNova.children[i].innerText;
-            let textIrmao2 = olNova.children[i].previousSibling.innerText
-            olNova.children[i].previousSibling.innerText = textSelec2;
-            olNova.children[i].innerText = textIrmao2;
-            olNova.children[i].previousSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            olNova.children[i].style.backgroundColor = '';
-            return olNova.children[i]
- 
-        
+function moverBaixo() {
+  for (let i = 0; i < listOl.children.length; i += 1) {
+    if (listOl.children[i]
+      .style.backgroundColor === rgb
+         && listOl.children[i].nextSibling !== null) {
+      const textSelec = listOl.children[i].innerText;
+      const textIrmao = listOl.children[i].nextSibling.innerText;
+      listOl.children[i].innerText = textIrmao;
+      listOl.children[i].nextSibling.innerText = textSelec;
+      listOl.children[i].nextSibling.style.backgroundColor = rgb;
+      listOl.children[i].style.backgroundColor = '';
+      return listOl.children[i];
     }
+  }
 }
+function moverCima() {
+  for (let i = 0; i < listOl.children.length; i += 1) {
+    if (listOl.children[i]
+      .style.backgroundColor === rgb
+        && listOl.children[i].previousSibling !== null) {
+      const textSelec2 = listOl.children[i].innerText;
+      const textIrmao2 = listOl.children[i].previousSibling.innerText;
+      listOl.children[i].previousSibling.innerText = textSelec2;
+      listOl.children[i].innerText = textIrmao2;
+      listOl.children[i].previousSibling.style.backgroundColor = rgb;
+      listOl.children[i].style.backgroundColor = '';
+      return listOl.children[i];
+    }
+  }
 }
-function botaoRemSelecionado () {
-    let botaoRemSelec = document.createElement('button');
-    botaoRemSelec.id = 'remover-selecionado';
-    let textRemove = document.createTextNode('Remover Selecionado');
-    botaoRemSelec.appendChild(textRemove);
-    botoes.appendChild(botaoRemSelec);
+const botaoDown = document.getElementById('mover-baixo');
+botaoDown.addEventListener('click', moverBaixo);
+const botaoUp = document.getElementById('mover-cima');
+botaoUp.addEventListener('click', moverCima);
+function botaoRemSelecionado() {
+  const botaoRemSelec = document.createElement('button');
+  botaoRemSelec.id = 'remover-selecionado';
+  const textRemove = document.createTextNode('Remover Selecionado');
+  botaoRemSelec.appendChild(textRemove);
+  botoes.appendChild(botaoRemSelec);
 }
 botaoRemSelecionado();
 
-let botaoremover = document.getElementById('remover-selecionado');
-botaoremover.addEventListener('click',removerSelecionado);
-
-function removerSelecionado () {
-    for (i = 0; i < olNova.children.length; i =+ 1) {
-        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)') {
-            olNova.removeChild(olNova.children[i]);
-        }
+function removerSelecionado() {
+  for (let i = 0; i < listOl.children.length; i = +1) {
+    if (listOl.children[i].style.backgroundColor === rgb) {
+      listOl.removeChild(listOl.children[i]);
     }
+  }
 }
-
-
+const botaoremover = document.getElementById('remover-selecionado');
+botaoremover.addEventListener('click', removerSelecionado);
