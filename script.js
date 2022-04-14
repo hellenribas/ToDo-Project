@@ -1,6 +1,4 @@
-const sectionFirst = document.getElementById('input');
-const sectionList = document.getElementById('list');
-const botoes = document.getElementById('botoes');
+let sectionFirst = document.getElementById('input');
 function criarInput() {
     let input = document.createElement('input');
     input.type = 'text';
@@ -9,6 +7,7 @@ function criarInput() {
 }
 criarInput();
 
+let sectionList = document.getElementById('list');
 function criarLista() {
     let listOrden = document.createElement('ol');
     listOrden.id = 'lista-tarefas';
@@ -24,10 +23,10 @@ function criarBotao() {
     sectionFirst.appendChild(botao);
 }
 criarBotao();
-const botaoId = document.getElementById('criar-tarefa');
-const listOl = document.getElementById('lista-tarefas');
-const input = document.getElementById('texto-tarefa');
+let botaoId = document.getElementById('criar-tarefa');
 botaoId.addEventListener('click', addItens);
+let listOl = document.getElementById('lista-tarefas');
+let input = document.getElementById('texto-tarefa');
 
 function addItens() {
     let criarLiAdd = document.createElement('li');
@@ -37,8 +36,9 @@ function addItens() {
     listOl.lastChild.innerText = textInput;
     input.value = '';
 }
-const lis = document.getElementsByClassName('liAdd');
-listOl.addEventListener('click', addCor);
+let liAdicionadas = document.getElementById('lista-tarefas');
+let lis = document.getElementsByClassName('liAdd');
+liAdicionadas.addEventListener('click', addCor);
 function addCor(event) {
     let clicado = event.target;
     for (i = 0; i < lis.length; i += 1) {
@@ -48,15 +48,17 @@ function addCor(event) {
 }
 }
 
-listOl.addEventListener('dblclick', riscandoTexto);
+liAdicionadas.addEventListener('dblclick', riscandoTexto);
 
 function riscandoTexto(event3) {
     if (event3.target.classList[1] !== 'completed') {
         event3.target.classList.add('completed');
     } else if (event3.target.classList[1] === 'completed') {
+        console.log('entrou no if else risco');
         event3.target.classList.remove('completed');
     }
 }
+let botoes = document.getElementById('botoes');
 function criarBotaoRemover() {
     let botao2 = document.createElement('button');
     botao2.id = 'apaga-tudo';
@@ -66,14 +68,15 @@ function criarBotaoRemover() {
     botoes.appendChild(botao2);
 }
 criarBotaoRemover();
-const botaoRemove = document.getElementById('apaga-tudo');
-const ol = document.querySelector('#lista-tarefas');
+let li = document.getElementsByClassName('liAdd');
+let botaoRemove = document.getElementById('apaga-tudo');
+let ol = document.querySelector('#lista-tarefas');
 botaoRemove.addEventListener('click', removerLista);
 function removerLista() {
     let liIndex = 0;
     const olLength = ol.children.length
     for (index = olLength - 1; index >= 0; index -= 1) {
-        liIndex = lis[index];
+        liIndex = li[index];
         ol.removeChild(liIndex);
     }
 }
@@ -91,7 +94,7 @@ function removerFinalizados() {
     const olLength = ol.children.length
     for (index = olLength - 1; index >= 0; index -= 1) {
         if (ol.children[index].classList[1] === 'completed') {
-            liIndex = lis[index];
+            liIndex = li[index];
             ol.removeChild(liIndex);
         }
     }
@@ -105,11 +108,15 @@ function criarBotaoSalvar () {
 }
 criarBotaoSalvar();
 let botaoSalvar = document.getElementById('salvar-tarefas');
+
+let olNova = document.getElementById('lista-tarefas');
+
 function pegarInformacoes (lista) {
     let arrayInfo = [];
     for (let index = 0; index < lista.children.length; index+= 1) {
         arrayInfo.push(lista.children[index].innerText, lista.children[index].className) 
     }
+    console.log(arrayInfo);
     return arrayInfo;
 }
 function  salvarLocalStorage (array) {
@@ -117,7 +124,7 @@ function  salvarLocalStorage (array) {
 }
 
 botaoSalvar.addEventListener('click', function () {
-    salvarLocalStorage(pegarInformacoes(listOl));
+    salvarLocalStorage(pegarInformacoes(olNova));
 });
 let itensLocalStorage = localStorage.getItem('key');
 function listaLocalStorage () {
@@ -126,7 +133,7 @@ function listaLocalStorage () {
         let liLocalStorage = document.createElement('li');
         liLocalStorage.innerText =  arrayLocal[index];
         liLocalStorage.className = arrayLocal[index + 1];
-        listOl.appendChild(liLocalStorage);
+        olNova.appendChild(liLocalStorage);
     }
 }
 if (itensLocalStorage !== null) {
@@ -147,33 +154,35 @@ function criarBotoesMover() {
 }
 criarBotoesMover();
 
-const botaoDown = document.getElementById('mover-baixo');
+let botaoDown = document.getElementById('mover-baixo');
 botaoDown.addEventListener('click', moverBaixo);
 function moverBaixo () {
-    for (i = 0; i < listOl.children.length; i += 1) {
-        if (listOl.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && listOl.children[i].nextSibling !== null) {
-            let textSelec = listOl.children[i].innerText;
-            let textIrmao = listOl.children[i].nextSibling.innerText
-            listOl.children[i].innerText = textIrmao;
-            listOl.children[i].nextSibling.innerText = textSelec;
-            listOl.children[i].nextSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            listOl.children[i].style.backgroundColor = '';
-            return listOl.children[i]
+    for (i = 0; i < olNova.children.length; i += 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].nextSibling !== null) {
+            let textSelec = olNova.children[i].innerText;
+            console.log(textSelec);
+            let textIrmao = olNova.children[i].nextSibling.innerText
+            console.log(textIrmao);
+            olNova.children[i].innerText = textIrmao;
+            olNova.children[i].nextSibling.innerText = textSelec;
+            olNova.children[i].nextSibling.style.backgroundColor = 'rgb(128, 128, 128)';
+            olNova.children[i].style.backgroundColor = '';
+            return olNova.children[i]
        }  
 }
 }
 let botaoUp = document.getElementById('mover-cima');
 botaoUp.addEventListener('click', moverCima);
 function moverCima () {
-    for (i = 0; i < listOl.children.length; i += 1) {
-        if (listOl.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && listOl.children[i].previousSibling !== null) {
-            let textSelec2 = listOl.children[i].innerText;
-            let textIrmao2 = listOl.children[i].previousSibling.innerText
-            listOl.children[i].previousSibling.innerText = textSelec2;
-            listOl.children[i].innerText = textIrmao2;
-            listOl.children[i].previousSibling.style.backgroundColor = 'rgb(128, 128, 128)';
-            listOl.children[i].style.backgroundColor = '';
-            return listOl.children[i]
+    for (i = 0; i < olNova.children.length; i += 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)' && olNova.children[i].previousSibling !== null) {
+            let textSelec2 = olNova.children[i].innerText;
+            let textIrmao2 = olNova.children[i].previousSibling.innerText
+            olNova.children[i].previousSibling.innerText = textSelec2;
+            olNova.children[i].innerText = textIrmao2;
+            olNova.children[i].previousSibling.style.backgroundColor = 'rgb(128, 128, 128)';
+            olNova.children[i].style.backgroundColor = '';
+            return olNova.children[i]
  
         
     }
@@ -188,13 +197,13 @@ function botaoRemSelecionado () {
 }
 botaoRemSelecionado();
 
-const botaoremover = document.getElementById('remover-selecionado');
+let botaoremover = document.getElementById('remover-selecionado');
 botaoremover.addEventListener('click',removerSelecionado);
 
 function removerSelecionado () {
-    for (i = 0; i < listOl.children.length; i =+ 1) {
-        if (listOl.children[i].style.backgroundColor === 'rgb(128, 128, 128)') {
-            listOl.removeChild(listOl.children[i]);
+    for (i = 0; i < olNova.children.length; i =+ 1) {
+        if (olNova.children[i].style.backgroundColor === 'rgb(128, 128, 128)') {
+            olNova.removeChild(olNova.children[i]);
         }
     }
 }
