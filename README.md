@@ -1,5 +1,7 @@
 # Habilidades
 
+ Um dos primeiros projetos utilizando JavaScript, CSS e HTML
+
 - Manipular CSS
 
 - Manipular Javascript
